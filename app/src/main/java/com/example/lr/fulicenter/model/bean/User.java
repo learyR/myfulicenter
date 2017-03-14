@@ -1,6 +1,7 @@
-package com.example.lr.fulicenter.bean;
+package com.example.lr.fulicenter.model.bean;
 
 
+import com.example.lr.fulicenter.application.I;
 
 /**
  * Created by clawpo on 2016/10/21.
@@ -58,9 +59,9 @@ public class User {
         this.mavatarPath = mavatarPath;
     }
 
-//    public String getMavatarSuffix() {
-////        return mavatarSuffix!=null?mavatarSuffix: I.AVATAR_SUFFIX_JPG;
-//    }
+    public String getMavatarSuffix() {
+        return mavatarSuffix!=null?mavatarSuffix: I.AVATAR_SUFFIX_JPG;
+    }
 
     public void setMavatarSuffix(String mavatarSuffix) {
         this.mavatarSuffix = mavatarSuffix;

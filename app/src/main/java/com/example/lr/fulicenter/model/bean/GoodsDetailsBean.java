@@ -1,4 +1,4 @@
-package com.example.lr.fulicenter.bean;
+package com.example.lr.fulicenter.model.bean;
 
 import java.io.Serializable;
 import java.util.Arrays;
