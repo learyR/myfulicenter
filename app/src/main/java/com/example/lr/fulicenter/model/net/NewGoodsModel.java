@@ -12,12 +12,12 @@ import com.example.lr.fulicenter.model.utils.OkHttpUtils;
 
 public class NewGoodsModel  extends ModelBase implements INewGoodsModel {
     @Override
-    public void loadData(Context context, int pageId, OnCompleteListener listener) {
+    public void loadData(Context context, int pageId, OnCompleteListener<NewGoodsBean[]> listener) {
         OkHttpUtils<NewGoodsBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_NEW_BOUTIQUE_GOODS)
-                .addParam(I.NewAndBoutiqueGoods.CAT_ID,I.CAT_ID+"")
-                .addParam(I.PAGE_ID,I.PAGE_ID+"")
-                .addParam(I.PAGE_SIZE,I.PAGE_SIZE_DEFAULT+"")
+                .addParam(I.NewAndBoutiqueGoods.CAT_ID,String.valueOf(I.CAT_ID))
+                .addParam(I.PAGE_ID,String.valueOf(pageId))
+                .addParam(I.PAGE_SIZE,String.valueOf(I.PAGE_SIZE_DEFAULT))
                 .targetClass(NewGoodsBean[].class)
                 .execute(listener);
     }
