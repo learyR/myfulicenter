@@ -1,12 +1,15 @@
 package com.example.lr.fulicenter.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 
 import com.example.lr.fulicenter.R;
+import com.example.lr.fulicenter.ui.fragment.BoutiqueFragment;
 import com.example.lr.fulicenter.ui.fragment.NewGoodsFragment;
 
 import butterknife.BindView;
@@ -28,19 +31,62 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.personal)
     RadioButton personal;
     Unbinder bind = null;
-    int index=0;
+    Fragment[] mFragment;
+    NewGoodsFragment mNewGoodsFragment;
+    BoutiqueFragment mBoutiqueFragment;
+    int mIndex;
+    int mCurrentIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bind = ButterKnife.bind(this);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, new NewGoodsFragment())
+        initFragment();
+    }
+
+    private void initFragment() {
+        mFragment = new Fragment[2];
+        mNewGoodsFragment = new NewGoodsFragment();
+        mBoutiqueFragment = new BoutiqueFragment();
+        mFragment[0] = mNewGoodsFragment;
+        mFragment[1] = mBoutiqueFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container,mNewGoodsFragment)
+                .add(R.id.fragment_container,mBoutiqueFragment)
+                .hide(mBoutiqueFragment)
+                .show(mNewGoodsFragment)
                 .commit();
     }
 
     public void onCheckedChange(View view) {
+        switch (view.getId()) {
+            case R.id.layout_new_good:
+                mIndex = 0;
+               /* NewGoodsFragment newGoodsFragment = new NewGoodsFragment();
+                mFragmentManager = getSupportFragmentManager();
+                mFragmentTransaction = mFragmentManager.beginTransaction();
+                mFragmentTransaction.replace(R.id.fragment_container, newGoodsFragment);
+                mFragmentTransaction.commit();*/
+                break;
+            case R.id.layout_boutique:
+                mIndex = 1;
+                break;
 
+        }
+        setFragment();
+    }
+
+    private void setFragment() {
+        if (mIndex != mCurrentIndex) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.hide(mFragment[mCurrentIndex]);
+            if (!mFragment[mIndex].isAdded()) {
+                ft.add(R.id.fragment_container, mFragment[mIndex]);
+            }
+            ft.show(mFragment[mIndex]).commitAllowingStateLoss();
+        }
+        mCurrentIndex=mIndex;
     }
 
     @Override
