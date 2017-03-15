@@ -31,7 +31,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     Context context;
 
     RecyclerView parent;
-    // String textFooter;
+    String textFooter;
     boolean isMore;
     int sortBy = I.SORT_BY_ADDTIME_DESC;
 
@@ -55,12 +55,6 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         isMore = more;
         notifyDataSetChanged();
     }
-
-    /*public void setTextFooter(String textFooter) {
-        this.textFooter = textFooter;
-        notifyDataSetChanged();
-    }*/
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -96,7 +90,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         ImageLoader.downloadImg(context, goodsViewHolder.ivNewGoods, newGoods.getGoodsThumb());
         goodsViewHolder.layoutNewGood.setTag(newGoods.getGoodsId());
     }
-
+    /**提示加载更多或者没有更多数据了*/
     private int getFooter() {
         return isMore ? R.string.load_more : R.string.no_more;
     }
