@@ -97,7 +97,8 @@ public class NewGoodsFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastPosition = mLayoutManager.findLastVisibleItemPosition();
-                if (lastPosition == mAdapter.getItemCount() - 1 && newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter.isMore()) {
+                if (lastPosition == mAdapter.getItemCount() - 1 &&
+                        newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter.isMore()) {
                     pageId++;
                     downLoad(I.ACTION_PULL_UP);
                 }
@@ -124,6 +125,16 @@ public class NewGoodsFragment extends Fragment {
                 getResources().getColor(R.color.google_yellow)
         );
         mLayoutManager = new GridLayoutManager(mContext, I.COLUM_NUM);
+        //优化footer的显示位置
+        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == mNewGoodsList.size()) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
         rvGoods.setLayoutManager(mLayoutManager);
         rvGoods.setHasFixedSize(true);
         rvGoods.addItemDecoration(new SpaceItemDecoration(15));
