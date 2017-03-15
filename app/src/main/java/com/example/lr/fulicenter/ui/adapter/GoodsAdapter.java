@@ -89,12 +89,12 @@ public class GoodsAdapter extends RecyclerView.Adapter {
             footerViewHolder.tvFooter.setText(getFooter());
             return;
         }
-        GoodsViewHolder newGoodsViewHolder = (GoodsViewHolder) holder;
+        GoodsViewHolder goodsViewHolder = (GoodsViewHolder) holder;
         NewGoodsBean newGoods = newGoodsList.get(position);
-        newGoodsViewHolder.tvGoodsName.setText(newGoods.getGoodsName());
-        newGoodsViewHolder.tvGoodsPrice.setText(newGoods.getCurrencyPrice());
-        ImageLoader.downloadImg(context, newGoodsViewHolder.ivNewGoods, newGoods.getGoodsThumb());
-        newGoodsViewHolder.layoutNewGood.setTag(newGoods.getGoodsId());
+        goodsViewHolder.tvGoodsName.setText(newGoods.getGoodsName());
+        goodsViewHolder.tvGoodsPrice.setText(newGoods.getCurrencyPrice());
+        ImageLoader.downloadImg(context, goodsViewHolder.ivNewGoods, newGoods.getGoodsThumb());
+        goodsViewHolder.layoutNewGood.setTag(newGoods.getGoodsId());
     }
 
     private int getFooter() {

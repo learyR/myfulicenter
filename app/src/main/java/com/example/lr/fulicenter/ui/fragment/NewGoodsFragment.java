@@ -20,6 +20,7 @@ import com.example.lr.fulicenter.model.utils.ConvertUtils;
 import com.example.lr.fulicenter.model.utils.L;
 import com.example.lr.fulicenter.ui.activity.MainActivity;
 import com.example.lr.fulicenter.ui.adapter.GoodsAdapter;
+import com.example.lr.fulicenter.ui.view.SpaceItemDecoration;
 
 import java.util.ArrayList;
 
@@ -78,7 +79,7 @@ public class NewGoodsFragment extends Fragment {
         mLayoutManager =new GridLayoutManager(mContext, I.COLUM_NUM);
         rvGoods.setLayoutManager(mLayoutManager);
         rvGoods.setHasFixedSize(true);
-//        rvGoods.addItemDecoration(new SpaceItemDecoration(15));
+        rvGoods.addItemDecoration(new SpaceItemDecoration(15));
         rvGoods.setAdapter(mAdapter);
         Bundle bundle = getArguments();
         if (bundle != null) {
