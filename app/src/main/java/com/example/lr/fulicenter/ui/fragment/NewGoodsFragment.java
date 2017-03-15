@@ -4,16 +4,24 @@ package com.example.lr.fulicenter.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lr.fulicenter.R;
+import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.NewGoodsBean;
+import com.example.lr.fulicenter.model.net.INewGoodsModel;
 import com.example.lr.fulicenter.model.net.NewGoodsModel;
 import com.example.lr.fulicenter.model.net.OnCompleteListener;
+import com.example.lr.fulicenter.model.utils.ConvertUtils;
 import com.example.lr.fulicenter.model.utils.L;
+import com.example.lr.fulicenter.ui.activity.MainActivity;
+import com.example.lr.fulicenter.ui.adapter.GoodsAdapter;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +36,13 @@ public class NewGoodsFragment extends Fragment {
     @BindView(R.id.rv_goods)
     RecyclerView rvGoods;
     Unbinder bind;
-    NewGoodsModel model;
+    INewGoodsModel model;
+    MainActivity mContext;
+    GoodsAdapter mAdapter;
+    ArrayList<NewGoodsBean> mNewGoodsList;
     int pageId = 1;
+    GridLayoutManager mLayoutManager;
+    int catId;
     public NewGoodsFragment() {
         // Required empty public constructor
     }
@@ -47,17 +60,39 @@ public class NewGoodsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        model = new NewGoodsModel();
+        initView();
         initData();
+    }
+
+    private void initView() {
+        model = new NewGoodsModel();
+        mContext = (MainActivity) getContext();
+        mNewGoodsList = new ArrayList<>();
+        mAdapter = new GoodsAdapter(mNewGoodsList, mContext);
+//        mSrlNewGoods.setColorSchemeColors(
+//                getResources().getColor(R.color.google_blue),
+//                getResources().getColor(R.color.google_green),
+//                getResources().getColor(R.color.google_red),
+//                getResources().getColor(R.color.google_yellow)
+//        );
+        mLayoutManager =new GridLayoutManager(mContext, I.COLUM_NUM);
+        rvGoods.setLayoutManager(mLayoutManager);
+        rvGoods.setHasFixedSize(true);
+//        rvGoods.addItemDecoration(new SpaceItemDecoration(15));
+        rvGoods.setAdapter(mAdapter);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            catId = bundle.getInt(I.Boutique.CAT_ID, 0);
+        }
     }
 
     private void initData() {
         model.loadData(getActivity(), pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
-                L.e("leary", "newGoodsFragment+HAHHAH" );
                 if (result != null && result.length > 0) {
-                    L.e("leary", "newGoodsFragment" + result.length);
+                    ArrayList<NewGoodsBean> goodsList = ConvertUtils.array2List(result);
+                    mAdapter.initData(goodsList);
                 }
             }
 
