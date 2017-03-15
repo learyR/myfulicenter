@@ -92,7 +92,7 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void setPullUpListener() {
-        rvGoods.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvGoods.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
