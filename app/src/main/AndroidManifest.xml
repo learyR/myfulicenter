@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".ui.activity.BoutiqueChildActivity">
         </activity>
+        <activity android:name=".ui.activity.GoodsDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

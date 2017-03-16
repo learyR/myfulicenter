@@ -13,6 +13,7 @@ import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.NewGoodsBean;
 import com.example.lr.fulicenter.model.utils.ImageLoader;
+import com.example.lr.fulicenter.model.utils.MFGT;
 import com.example.lr.fulicenter.ui.view.FooterViewHolder;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Lr on 2017/3/15.
@@ -154,7 +156,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         });
     }
 
-    static class GoodsViewHolder extends RecyclerView.ViewHolder {
+     class GoodsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivNewGoods)
         ImageView ivNewGoods;
         @BindView(R.id.tvGoodsName)
@@ -167,6 +169,11 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         public GoodsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+        @OnClick(R.id.layout_new_good)
+        public void onGoodsItemClick() {
+            int goodsId = (int) layoutNewGood.getTag();
+            MFGT.gotoGoodsDetailsActivity(context, goodsId);
         }
     }
 }
