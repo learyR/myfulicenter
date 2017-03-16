@@ -1,4 +1,4 @@
-package com.example.lr.fulicenter.ui.adapter;
+package com.example.lr.fulicenter.ui.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,7 +11,7 @@ import com.example.lr.fulicenter.R;
  */
 
 public class FooterViewHolder extends RecyclerView.ViewHolder {
-    TextView tvFooter;
+    public TextView tvFooter;
     public FooterViewHolder(View itemView) {
         super(itemView);
         tvFooter = (TextView) itemView.findViewById(R.id.tvFooter);

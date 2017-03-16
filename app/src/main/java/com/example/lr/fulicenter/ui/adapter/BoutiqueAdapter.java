@@ -13,6 +13,7 @@ import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.BoutiqueBean;
 import com.example.lr.fulicenter.model.utils.ImageLoader;
+import com.example.lr.fulicenter.ui.view.FooterViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
