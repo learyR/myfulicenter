@@ -13,6 +13,7 @@ import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.BoutiqueBean;
 import com.example.lr.fulicenter.model.utils.ImageLoader;
+import com.example.lr.fulicenter.model.utils.MFGT;
 import com.example.lr.fulicenter.ui.view.FooterViewHolder;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Lr on 2017/3/15.
@@ -80,6 +82,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         boutiqueViewHolder.tvBoutiqueName.setText(boutiqueBean.getName());
         boutiqueViewHolder.tvBoutiqueDescription.setText(boutiqueBean.getDescription());
         ImageLoader.downloadImg(context, boutiqueViewHolder.ivBoutique, boutiqueBean.getImageurl());
+        boutiqueViewHolder.layoutBoutique.setTag(boutiqueBean);
     }
 
     /**
@@ -117,7 +120,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     }
 
 
-    static class BoutiqueViewHolder  extends RecyclerView.ViewHolder{
+     class BoutiqueViewHolder  extends RecyclerView.ViewHolder{
         @BindView(R.id.iv_boutique)
         ImageView ivBoutique;
         @BindView(R.id.tv_boutique_title)
@@ -132,6 +135,11 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         BoutiqueViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+        @OnClick(R.id.layout_boutique)
+        public void onBoutiqueClick(){
+            BoutiqueBean bean = (BoutiqueBean) layoutBoutique.getTag();
+            MFGT.gotoBoutiqueChildActivity(context,bean);
         }
     }
 }
