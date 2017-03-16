@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 
 import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.ui.fragment.BoutiqueFragment;
+import com.example.lr.fulicenter.ui.fragment.CateGoryFragment;
 import com.example.lr.fulicenter.ui.fragment.NewGoodsFragment;
 
 import butterknife.BindView;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] mFragment;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    CateGoryFragment mCateGoryFragment;
     int mIndex;
     int mCurrentIndex;
     @Override
@@ -45,16 +47,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragment() {
-        mFragment = new Fragment[2];
+        mFragment = new Fragment[3];
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
+        mCateGoryFragment = new CateGoryFragment();
         mFragment[0] = mNewGoodsFragment;
         mFragment[1] = mBoutiqueFragment;
+        mFragment[2] = mCateGoryFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container,mNewGoodsFragment)
                 .add(R.id.fragment_container,mBoutiqueFragment)
+                .add(R.id.fragment_container,mCateGoryFragment)
                 .hide(mBoutiqueFragment)
+                .hide(mCateGoryFragment)
                 .show(mNewGoodsFragment)
                 .commit();
     }
@@ -71,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.layout_boutique:
                 mIndex = 1;
+                break;
+            case R.id.layout_category:
+                mIndex = 2;
                 break;
 
         }
