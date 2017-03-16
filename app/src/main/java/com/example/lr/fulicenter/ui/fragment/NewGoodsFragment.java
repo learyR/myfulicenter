@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.I;
+import com.example.lr.fulicenter.model.bean.BoutiqueBean;
 import com.example.lr.fulicenter.model.bean.NewGoodsBean;
 import com.example.lr.fulicenter.model.net.INewGoodsModel;
 import com.example.lr.fulicenter.model.net.NewGoodsModel;
@@ -21,7 +22,6 @@ import com.example.lr.fulicenter.model.net.OnCompleteListener;
 import com.example.lr.fulicenter.model.utils.CommonUtils;
 import com.example.lr.fulicenter.model.utils.ConvertUtils;
 import com.example.lr.fulicenter.model.utils.L;
-import com.example.lr.fulicenter.ui.activity.MainActivity;
 import com.example.lr.fulicenter.ui.adapter.GoodsAdapter;
 import com.example.lr.fulicenter.ui.view.SpaceItemDecoration;
 
@@ -41,16 +41,16 @@ public class NewGoodsFragment extends Fragment {
     RecyclerView rvGoods;
     Unbinder bind;
     INewGoodsModel model;
-    MainActivity mContext;
     GoodsAdapter mAdapter;
     ArrayList<NewGoodsBean> mNewGoodsList;
     int pageId = 1;
     GridLayoutManager mLayoutManager;
-    int catId;
+    int catId=0;
     @BindView(R.id.tvRefresh)
     TextView tvRefresh;
     @BindView(R.id.srl)
     SwipeRefreshLayout srl;
+    BoutiqueBean boutiqueBean;
 
     public NewGoodsFragment() {
         // Required empty public constructor
@@ -69,6 +69,10 @@ public class NewGoodsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        boutiqueBean = (BoutiqueBean) getActivity().getIntent().getSerializableExtra(I.Boutique.CAT_ID);
+        if (boutiqueBean != null) {
+            catId = boutiqueBean.getId();
+        }
         initView();
         initData();
         setListener();
@@ -115,16 +119,15 @@ public class NewGoodsFragment extends Fragment {
 
     private void initView() {
         model = new NewGoodsModel();
-        mContext = (MainActivity) getContext();
         mNewGoodsList = new ArrayList<>();
-        mAdapter = new GoodsAdapter(mNewGoodsList, mContext);
+        mAdapter = new GoodsAdapter(mNewGoodsList, getActivity());
         srl.setColorSchemeColors(
                 getResources().getColor(R.color.google_blue),
                 getResources().getColor(R.color.google_green),
                 getResources().getColor(R.color.google_red),
                 getResources().getColor(R.color.google_yellow)
         );
-        mLayoutManager = new GridLayoutManager(mContext, I.COLUM_NUM);
+        mLayoutManager = new GridLayoutManager(getActivity(), I.COLUM_NUM);
         //优化footer的显示位置
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -139,10 +142,6 @@ public class NewGoodsFragment extends Fragment {
         rvGoods.setHasFixedSize(true);
         rvGoods.addItemDecoration(new SpaceItemDecoration(15));
         rvGoods.setAdapter(mAdapter);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            catId = bundle.getInt(I.Boutique.CAT_ID, 0);
-        }
     }
 
     private void initData() {
@@ -150,7 +149,7 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void downLoad(final int action) {
-        model.loadData(getActivity(), pageId, new OnCompleteListener<NewGoodsBean[]>() {
+        model.loadData(getActivity(),catId, pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 srl.setRefreshing(false);

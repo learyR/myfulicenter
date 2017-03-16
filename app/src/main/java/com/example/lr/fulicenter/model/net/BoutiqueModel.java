@@ -18,4 +18,6 @@ public class BoutiqueModel extends ModelBase implements IBoutiqueModel {
                 .targetClass(BoutiqueBean[].class)
                 .execute(listener);
     }
+
+
 }

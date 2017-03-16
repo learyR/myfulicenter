@@ -9,5 +9,6 @@ import com.example.lr.fulicenter.model.bean.NewGoodsBean;
  */
 
 public interface INewGoodsModel extends IModelBase {
-     void loadData(Context context, int pageId, OnCompleteListener<NewGoodsBean[]> listener);
+     void loadData(Context context, int catId, int pageId, OnCompleteListener<NewGoodsBean[]> listener);
+
 }
