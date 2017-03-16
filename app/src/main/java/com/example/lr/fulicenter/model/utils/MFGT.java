@@ -7,9 +7,13 @@ import android.content.Intent;
 import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.BoutiqueBean;
+import com.example.lr.fulicenter.model.bean.CategoryChildBean;
 import com.example.lr.fulicenter.ui.activity.BoutiqueChildActivity;
+import com.example.lr.fulicenter.ui.activity.CategoryChildActivity;
 import com.example.lr.fulicenter.ui.activity.GoodsDetailsActivity;
 import com.example.lr.fulicenter.ui.activity.MainActivity;
+
+import java.util.ArrayList;
 
 
 public class MFGT {
@@ -41,7 +45,7 @@ public class MFGT {
         startActivity(context,intent);
     }
     /**
-            * 跳转到商品详情Activity
+     * 跳转到商品详情Activity
      * @param context
      * @param goodsId 商品id
      */
@@ -50,6 +54,20 @@ public class MFGT {
         intent.setClass(context, GoodsDetailsActivity.class);
         intent.putExtra(I.GoodsDetails.KEY_GOODS_ID, goodsId);
         startActivity(context,intent);
+    }
+    /**
+     * 跳转到分类二级页面的Activity中
+     *
+     * @param context
+     * @param catId
+     */
+    public static void gotoCategoryChildActivity(Context context, int catId, String groupName, ArrayList<CategoryChildBean> list) {
+        Intent intent = new Intent();
+        intent.setClass(context, CategoryChildActivity.class);
+        intent.putExtra(I.CategoryChild.CAT_ID, catId);
+        intent.putExtra(I.CategoryGroup.NAME, groupName);
+        intent.putExtra(I.CategoryChild.ID, list);
+        startActivity(context, intent);
     }
 
    /*
