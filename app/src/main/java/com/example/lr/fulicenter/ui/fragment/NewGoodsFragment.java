@@ -189,4 +189,8 @@ public class NewGoodsFragment extends Fragment {
             bind.unbind();
         }
     }
+
+    public void setSortBy(int sortBy) {
+        mAdapter.setSortBy(sortBy);
+    }
 }
