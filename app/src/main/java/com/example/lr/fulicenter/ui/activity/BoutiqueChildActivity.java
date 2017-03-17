@@ -27,7 +27,7 @@ public class BoutiqueChildActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, new NewGoodsFragment())
                 .commit();
-        BoutiqueBean bean = (BoutiqueBean) getIntent().getSerializableExtra(I.Boutique.CAT_ID);
+        BoutiqueBean bean = (BoutiqueBean) getIntent().getSerializableExtra(I.NewAndBoutiqueGoods.CAT_ID);
         if (bean != null) {
             tvGoodsName.setText(bean.getTitle());
         }

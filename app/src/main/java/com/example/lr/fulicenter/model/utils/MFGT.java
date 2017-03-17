@@ -41,7 +41,8 @@ public class MFGT {
     public static void gotoBoutiqueChildActivity(Context context, BoutiqueBean bean){
         Intent intent = new Intent();
         intent.setClass(context, BoutiqueChildActivity.class);
-        intent.putExtra(I.Boutique.CAT_ID,bean);
+        intent.putExtra(I.Boutique.CAT_ID,bean.getId());
+        intent.putExtra(I.NewAndBoutiqueGoods.CAT_ID, bean);
         startActivity(context,intent);
     }
     /**
@@ -64,7 +65,7 @@ public class MFGT {
     public static void gotoCategoryChildActivity(Context context, int catId, String groupName, ArrayList<CategoryChildBean> list) {
         Intent intent = new Intent();
         intent.setClass(context, CategoryChildActivity.class);
-        intent.putExtra(I.CategoryChild.CAT_ID, catId);
+        intent.putExtra(I.Boutique.CAT_ID, catId);
         intent.putExtra(I.CategoryGroup.NAME, groupName);
         intent.putExtra(I.CategoryChild.ID, list);
         startActivity(context, intent);

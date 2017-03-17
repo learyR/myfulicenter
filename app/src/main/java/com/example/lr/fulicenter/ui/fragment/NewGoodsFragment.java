@@ -69,9 +69,9 @@ public class NewGoodsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        boutiqueBean = (BoutiqueBean) getActivity().getIntent().getSerializableExtra(I.Boutique.CAT_ID);
-        if (boutiqueBean != null) {
-            catId = boutiqueBean.getId();
+        int CategoryCatId = getActivity().getIntent().getIntExtra(I.Boutique.CAT_ID, 0);
+        if (CategoryCatId != 0) {
+            catId = CategoryCatId;
         }
         initView();
         initData();
