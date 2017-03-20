@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 
 import com.example.lr.fulicenter.R;
+import com.example.lr.fulicenter.application.FuLiCenterApplication;
+import com.example.lr.fulicenter.model.utils.MFGT;
 import com.example.lr.fulicenter.ui.fragment.BoutiqueFragment;
 import com.example.lr.fulicenter.ui.fragment.CateGoryFragment;
 import com.example.lr.fulicenter.ui.fragment.NewGoodsFragment;
@@ -38,12 +40,23 @@ public class MainActivity extends AppCompatActivity {
     CateGoryFragment mCateGoryFragment;
     int mIndex;
     int mCurrentIndex;
+    RadioButton[] mRbArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bind = ButterKnife.bind(this);
+        initView();
         initFragment();
+    }
+
+    private void initView() {
+        mRbArray=new RadioButton[5];
+        mRbArray[0] = layoutNewGood;
+        mRbArray[1] = layoutBoutique;
+        mRbArray[2] = layoutCategory;
+        mRbArray[3] = layoutCart;
+        mRbArray[4] = personal;
     }
 
     private void initFragment() {
@@ -69,17 +82,26 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.layout_new_good:
                 mIndex = 0;
-               /* NewGoodsFragment newGoodsFragment = new NewGoodsFragment();
-                mFragmentManager = getSupportFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.fragment_container, newGoodsFragment);
-                mFragmentTransaction.commit();*/
                 break;
             case R.id.layout_boutique:
                 mIndex = 1;
                 break;
             case R.id.layout_category:
                 mIndex = 2;
+                break;
+            case R.id.layout_cart:
+                if (FuLiCenterApplication.getUser() == null) {
+                    MFGT.gotoLoginActivityFromCart(this);
+                } else {
+                    mIndex = 3;
+                }
+                break;
+            case R.id.personal:
+                if (FuLiCenterApplication.getUser() == null) {
+                    MFGT.gotoLoginActivity(this);
+                } else {
+                    mIndex = 4;
+                }
                 break;
 
         }
@@ -95,7 +117,26 @@ public class MainActivity extends AppCompatActivity {
             }
             ft.show(mFragment[mIndex]).commitAllowingStateLoss();
         }
+        setRadioButtonStatus();
         mCurrentIndex=mIndex;
+    }
+    private void setRadioButtonStatus() {
+
+        for (int i=0;i<mRbArray.length;i++) {
+            if (i==mIndex) {
+                mRbArray[i].setChecked(true);
+            } else {
+                mRbArray[i].setChecked(false);
+            }
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mIndex == 4 && FuLiCenterApplication.getUser() == null) {
+            mIndex = 0;
+        }
+        setFragment();
     }
 
     @Override

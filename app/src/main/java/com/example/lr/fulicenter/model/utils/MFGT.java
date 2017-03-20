@@ -11,7 +11,9 @@ import com.example.lr.fulicenter.model.bean.CategoryChildBean;
 import com.example.lr.fulicenter.ui.activity.BoutiqueChildActivity;
 import com.example.lr.fulicenter.ui.activity.CategoryChildActivity;
 import com.example.lr.fulicenter.ui.activity.GoodsDetailsActivity;
+import com.example.lr.fulicenter.ui.activity.LoginActivity;
 import com.example.lr.fulicenter.ui.activity.MainActivity;
+import com.example.lr.fulicenter.ui.activity.RegisterActivity;
 
 import java.util.ArrayList;
 
@@ -69,6 +71,34 @@ public class MFGT {
         intent.putExtra(I.CategoryGroup.NAME, groupName);
         intent.putExtra(I.CategoryChild.ID, list);
         startActivity(context, intent);
+    }
+    /**
+     * 跳转到LoginActivity
+     * @param context
+     */
+    public static void gotoLoginActivity(Activity context) {
+        Intent intent = new Intent();
+        intent.setClass(context, LoginActivity.class);
+        startActivityForResult(context,intent,I.REQUEST_CODE_LOGIN);
+    }
+
+    public static void gotoLoginActivityFromCart(Activity context) {
+        Intent intent = new Intent();
+        intent.setClass(context, LoginActivity.class);
+        startActivityForResult(context,intent,I.REQUEST_CODE_CART);
+    }
+    public static void startActivityForResult(Activity context, Intent intent, int requestCode) {
+        context.startActivityForResult(intent, requestCode);
+        context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+    /**
+     * 跳转到RegisterActivity
+     * @param context
+     */
+    public static void gotoRegisterActivity(Activity context) {
+        Intent intent = new Intent();
+        intent.setClass(context, RegisterActivity.class);
+        startActivityForResult(context, intent, I.REQUEST_CODE_REGISTER);
     }
 
    /*
