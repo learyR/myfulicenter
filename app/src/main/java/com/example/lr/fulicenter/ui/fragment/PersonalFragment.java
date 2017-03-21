@@ -46,8 +46,13 @@ public class PersonalFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal, container, false);
         ButterKnife.bind(this, view);
+        initView();
         initData();
         return view;
+    }
+
+    private void initView() {
+        mContext = (MainActivity) getActivity();
     }
 
     private void initData() {
