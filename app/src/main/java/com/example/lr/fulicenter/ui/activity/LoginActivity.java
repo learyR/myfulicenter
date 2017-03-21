@@ -9,9 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.lr.fulicenter.R;
+import com.example.lr.fulicenter.application.FuLiCenterApplication;
 import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.bean.Result;
 import com.example.lr.fulicenter.model.bean.User;
+import com.example.lr.fulicenter.model.dao.SharedPreferenceUtils;
+import com.example.lr.fulicenter.model.dao.UserDao;
 import com.example.lr.fulicenter.model.net.IUserModel;
 import com.example.lr.fulicenter.model.net.OnCompleteListener;
 import com.example.lr.fulicenter.model.net.UserModel;
@@ -92,14 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                 Result result = ResultUtils.getResultFromJson(str, User.class);
                 if (result.getRetCode() !=0) {
                     CommonUtils.showShortToast(R.string.login_fail);
-                } else /*{
+                } else {
                     if (result.isRetMsg()) {
                         User user= (User) result.getRetData();
-                      *//*  String strUser = result.getRetData().toString();
-                        OkHttpUtils<User> utils = new OkHttpUtils<>(mContext);
-                        User user = utils.parseJson(strUser, User.class);*//*
-                        L.e("login"+user.toString());
-
                         UserDao dao = new UserDao(mContext);
                         boolean isSuccess= dao.saveUser(user);
                         if (isSuccess) {
@@ -119,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                             CommonUtils.showLongToast(R.string.login_fail);
                         }
                     }
-                }*/
+                }
                 pd.dismiss();
             }
 
