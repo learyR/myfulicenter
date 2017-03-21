@@ -14,6 +14,7 @@ import com.example.lr.fulicenter.model.utils.MFGT;
 import com.example.lr.fulicenter.ui.fragment.BoutiqueFragment;
 import com.example.lr.fulicenter.ui.fragment.CateGoryFragment;
 import com.example.lr.fulicenter.ui.fragment.NewGoodsFragment;
+import com.example.lr.fulicenter.ui.fragment.PersonalFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
     CateGoryFragment mCateGoryFragment;
+
+    PersonalFragment mPersonalFragment;
     int mIndex;
     int mCurrentIndex;
     RadioButton[] mRbArray;
@@ -60,13 +63,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragment() {
-        mFragment = new Fragment[3];
+        mFragment = new Fragment[5];
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mCateGoryFragment = new CateGoryFragment();
+
+        mPersonalFragment = new PersonalFragment();
         mFragment[0] = mNewGoodsFragment;
         mFragment[1] = mBoutiqueFragment;
         mFragment[2] = mCateGoryFragment;
+
+        mFragment[4] = mPersonalFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container,mNewGoodsFragment)
@@ -74,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragment_container,mCateGoryFragment)
                 .hide(mBoutiqueFragment)
                 .hide(mCateGoryFragment)
+                .hide(mPersonalFragment)
                 .show(mNewGoodsFragment)
                 .commit();
     }
