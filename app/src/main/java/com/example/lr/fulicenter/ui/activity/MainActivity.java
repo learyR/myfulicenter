@@ -1,5 +1,6 @@
 package com.example.lr.fulicenter.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 
 import com.example.lr.fulicenter.R;
 import com.example.lr.fulicenter.application.FuLiCenterApplication;
+import com.example.lr.fulicenter.application.I;
 import com.example.lr.fulicenter.model.utils.MFGT;
 import com.example.lr.fulicenter.ui.fragment.BoutiqueFragment;
 import com.example.lr.fulicenter.ui.fragment.CateGoryFragment;
@@ -145,6 +147,17 @@ public class MainActivity extends AppCompatActivity {
             mIndex = 0;
         }
         setFragment();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ( FuLiCenterApplication.getUser()!=null) {
+            if (requestCode == I.REQUEST_CODE_LOGIN) {
+                mIndex = 4;
+            } else if (requestCode == I.REQUEST_CODE_CART) {
+                mIndex = 3;
+            }
+        }
     }
 
     @Override
