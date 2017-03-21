@@ -45,4 +45,9 @@
     <string name="order_nothing">您还没有选择宝贝哦</string>
     <string name="confirm_order">确认订单</string>
     <string name="login_success">登录成功</string>
+    <string name="update_nick_fail">跟新昵称失败</string>
+    <string name="update_nick_success">跟新昵称成功</string>
+    <string name="update_database_error">更新数据库错误</string>
+    <string name="update_avatar_fail">跟新头像失败</string>
+    <string name="update_avatar_success">跟新头像成功</string>
 </resources>

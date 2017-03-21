@@ -48,4 +48,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_success">login_success</string>
+    <string name="update_nick_fail">update_nick_fail</string>
+    <string name="update_nick_success">update_nick_success</string>
+    <string name="update_database_error">update_database_error</string>
+    <string name="update_avatar_fail">update_avatar_fail</string>
+    <string name="update_avatar_success">update_avatar_success</string>
 </resources>
