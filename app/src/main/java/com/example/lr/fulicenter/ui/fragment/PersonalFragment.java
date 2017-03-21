@@ -17,6 +17,7 @@ import com.example.lr.fulicenter.ui.activity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,4 +60,13 @@ public class PersonalFragment extends Fragment {
         }
     }
 
+    @OnClick({R.id.tvSetting, R.id.linearSetting})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvSetting:
+            case R.id.linearSetting:
+                MFGT.gotoSettingActivity(mContext);
+                break;
+        }
+    }
 }

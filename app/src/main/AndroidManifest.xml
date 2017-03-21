@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".ui.activity.RegisterActivity">
         </activity>
+        <activity android:name=".ui.activity.SettingActivity">
+        </activity>
     </application>
 
 </manifest>
